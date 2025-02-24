@@ -26,7 +26,7 @@
         </div>
 
         <div class="user-cart">
-            <a href="login.jsp"><i class="fa-solid fa-user"></i></a>
+            <a href="viewProfile.jsp"><i class="fa-solid fa-user"></i></a>
             <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </div>

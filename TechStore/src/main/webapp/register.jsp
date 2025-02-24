@@ -4,6 +4,7 @@
         <title>Register</title>
         <link rel="stylesheet" href="CSS/register.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     </head>
     <body>
 
@@ -16,7 +17,7 @@
             <p class="error-message"><%= request.getAttribute("errorMessage") %></p>
             <% } %>
 
-            <form action="RegisterServlet" method="post" onsubmit="return validatePassword()">
+            <form action="register" method="post" onsubmit="return validatePassword()">
                 <div class="input-group">
                     <label>Email:</label>
                     <input type="email" name="email" placeholder="Enter your email" required>
@@ -56,9 +57,6 @@
             </form>
 
             <p class="divider">Or sign up with</p>
-            <div class="google-btn">
-                <i class="fa-brands fa-google"></i> Sign up with Google
-            </div>
 
             <p class="signup-text">Already have an account? <a href="login.jsp">Login here</a></p>
         </div>
