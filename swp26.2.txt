@@ -1,0 +1,494 @@
+database hiện tại: USE [master]
+GO
+
+CREATE DATABASE [project_SWP]
+GO
+
+USE [project_SWP]
+GO
+/****** Object:  Table [dbo].[Admins]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Admins](
+	[admin_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_id] [int] NULL,
+	[role] [varchar](50) NOT NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[admin_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cart]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cart](
+	[cart_id] [int] IDENTITY(1,1) NOT NULL,
+	[customer_id] [int] NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cart_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CartItems]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CartItems](
+	[cart_item_id] [int] IDENTITY(1,1) NOT NULL,
+	[cart_id] [int] NULL,
+	[product_id] [int] NULL,
+	[quantity] [int] NOT NULL,
+	[added_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cart_item_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[category_id] [int] IDENTITY(1,1) NOT NULL,
+	[category_name] [varchar](255) NOT NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[customer_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_id] [int] NULL,
+	[loyalty_points] [int] NULL,
+	[preferred_payment_method] [varchar](50) NULL,
+	[delivery_address] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[customer_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderDetails](
+	[order_detail_id] [int] IDENTITY(1,1) NOT NULL,
+	[order_id] [int] NULL,
+	[product_id] [int] NULL,
+	[quantity] [int] NULL,
+	[unit_price] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[order_detail_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[order_id] [int] IDENTITY(1,1) NOT NULL,
+	[customer_id] [int] NULL,
+	[total_amount] [decimal](10, 2) NOT NULL,
+	[order_date] [datetime] NULL,
+	[shipping_address] [text] NULL,
+	[order_status] [varchar](50) NOT NULL,
+	[payment_id] [int] NULL,
+	[promotion_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[order_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payments](
+	[payment_id] [int] IDENTITY(1,1) NOT NULL,
+	[order_id] [int] NULL,
+	[payment_date] [datetime] NULL,
+	[amount] [decimal](10, 2) NOT NULL,
+	[payment_status] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[payment_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductCategories]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductCategories](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[product_id] [int] NULL,
+	[category_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[product_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](255) NOT NULL,
+	[description] [text] NULL,
+	[price] [decimal](10, 2) NOT NULL,
+	[discount_price] [decimal](10, 2) NULL,
+	[category_id] [int] NULL,
+	[stock_quantity] [int] NOT NULL,
+	[image_url] [varchar](255) NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+	[promotion_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[product_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Promotions]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Promotions](
+	[promotion_id] [int] IDENTITY(1,1) NOT NULL,
+	[code] [varchar](50) NOT NULL,
+	[discount_percentage] [decimal](5, 2) NULL,
+	[expiration_date] [date] NULL,
+	[status] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[promotion_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[code] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RevenueReports]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RevenueReports](
+	[report_id] [int] IDENTITY(1,1) NOT NULL,
+	[store_id] [int] NULL,
+	[report_date] [date] NULL,
+	[total_revenue] [decimal](10, 2) NOT NULL,
+	[total_orders] [int] NOT NULL,
+	[total_sales] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[report_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reviews]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reviews](
+	[review_id] [int] IDENTITY(1,1) NOT NULL,
+	[product_id] [int] NULL,
+	[customer_id] [int] NULL,
+	[rating] [int] NULL,
+	[comment] [text] NULL,
+	[created_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[review_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Shipping]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Shipping](
+	[shipping_id] [int] IDENTITY(1,1) NOT NULL,
+	[order_id] [int] NULL,
+	[tracking_number] [varchar](255) NULL,
+	[carrier] [varchar](100) NULL,
+	[estimated_delivery] [date] NULL,
+	[status] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[shipping_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[tracking_number] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Staff]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Staff](
+	[staff_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_id] [int] NULL,
+	[role] [varchar](50) NOT NULL,
+	[hired_date] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[staff_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StaffManagement]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StaffManagement](
+	[staff_management_id] [int] IDENTITY(1,1) NOT NULL,
+	[store_id] [int] NULL,
+	[staff_id] [int] NULL,
+	[role] [varchar](50) NOT NULL,
+	[assigned_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[staff_management_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stores]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stores](
+	[store_id] [int] IDENTITY(1,1) NOT NULL,
+	[manager_id] [int] NULL,
+	[store_name] [varchar](255) NULL,
+	[location] [varchar](255) NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[store_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 2/24/2025 2:28:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[user_id] [int] IDENTITY(1,1) NOT NULL,
+	[email] [varchar](255) NOT NULL,
+	[password_hash] [varchar](255) NOT NULL,
+	[role] [varchar](50) NOT NULL,
+	[first_name] [varchar](255) NULL,
+	[last_name] [varchar](255) NULL,
+	[phone] [varchar](20) NULL,
+	[address] [text] NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Admins] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Admins] ADD  DEFAULT (getdate()) FOR [updated_at]
+GO
+ALTER TABLE [dbo].[Cart] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Cart] ADD  DEFAULT (getdate()) FOR [updated_at]
+GO
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT ((1)) FOR [quantity]
+GO
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT (getdate()) FOR [added_at]
+GO
+ALTER TABLE [dbo].[Customer] ADD  DEFAULT ((0)) FOR [loyalty_points]
+GO
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT (getdate()) FOR [order_date]
+GO
+ALTER TABLE [dbo].[Payments] ADD  DEFAULT (getdate()) FOR [payment_date]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT ((0)) FOR [stock_quantity]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [updated_at]
+GO
+ALTER TABLE [dbo].[Promotions] ADD  DEFAULT ('Active') FOR [status]
+GO
+ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Shipping] ADD  DEFAULT ('Processing') FOR [status]
+GO
+ALTER TABLE [dbo].[Staff] ADD  DEFAULT (getdate()) FOR [hired_date]
+GO
+ALTER TABLE [dbo].[StaffManagement] ADD  DEFAULT (getdate()) FOR [assigned_at]
+GO
+ALTER TABLE [dbo].[Stores] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Stores] ADD  DEFAULT (getdate()) FOR [updated_at]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT (getdate()) FOR [updated_at]
+GO
+ALTER TABLE [dbo].[Admins]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[Cart]  WITH CHECK ADD FOREIGN KEY([customer_id])
+REFERENCES [dbo].[Customer] ([customer_id])
+GO
+ALTER TABLE [dbo].[CartItems]  WITH CHECK ADD FOREIGN KEY([cart_id])
+REFERENCES [dbo].[Cart] ([cart_id])
+GO
+ALTER TABLE [dbo].[CartItems]  WITH CHECK ADD FOREIGN KEY([product_id])
+REFERENCES [dbo].[Products] ([product_id])
+GO
+ALTER TABLE [dbo].[Customer]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD FOREIGN KEY([order_id])
+REFERENCES [dbo].[Orders] ([order_id])
+GO
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD FOREIGN KEY([product_id])
+REFERENCES [dbo].[Products] ([product_id])
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([customer_id])
+REFERENCES [dbo].[Customer] ([customer_id])
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([payment_id])
+REFERENCES [dbo].[Payments] ([payment_id])
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([promotion_id])
+REFERENCES [dbo].[Promotions] ([promotion_id])
+GO
+ALTER TABLE [dbo].[ProductCategories]  WITH CHECK ADD FOREIGN KEY([category_id])
+REFERENCES [dbo].[Categories] ([category_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ProductCategories]  WITH CHECK ADD FOREIGN KEY([product_id])
+REFERENCES [dbo].[Products] ([product_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Products]  WITH CHECK ADD FOREIGN KEY([category_id])
+REFERENCES [dbo].[Categories] ([category_id])
+GO
+ALTER TABLE [dbo].[Products]  WITH CHECK ADD FOREIGN KEY([promotion_id])
+REFERENCES [dbo].[Promotions] ([promotion_id])
+GO
+ALTER TABLE [dbo].[RevenueReports]  WITH CHECK ADD FOREIGN KEY([store_id])
+REFERENCES [dbo].[Stores] ([store_id])
+GO
+ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD FOREIGN KEY([customer_id])
+REFERENCES [dbo].[Customer] ([customer_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD FOREIGN KEY([product_id])
+REFERENCES [dbo].[Products] ([product_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Shipping]  WITH CHECK ADD FOREIGN KEY([order_id])
+REFERENCES [dbo].[Orders] ([order_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Staff]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[StaffManagement]  WITH CHECK ADD FOREIGN KEY([staff_id])
+REFERENCES [dbo].[Staff] ([staff_id])
+GO
+ALTER TABLE [dbo].[StaffManagement]  WITH CHECK ADD FOREIGN KEY([store_id])
+REFERENCES [dbo].[Stores] ([store_id])
+GO
+ALTER TABLE [dbo].[Stores]  WITH CHECK ADD FOREIGN KEY([manager_id])
+REFERENCES [dbo].[Staff] ([staff_id])
+GO
+ALTER TABLE [dbo].[Promotions]  WITH CHECK ADD CHECK  (([discount_percentage]>=(0) AND [discount_percentage]<=(100)))
+GO
+ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD CHECK  (([rating]>=(1) AND [rating]<=(5)))
+GO
+-- Thêm Users
+INSERT INTO Users (email, password_hash, role, first_name, last_name, phone, address)
+VALUES 
+('admin@example.com', 'hashedpassword123', 'Admin', 'Admin', 'User', '0123456789', '123 Main St'),
+('customer1@example.com', 'hashedpassword456', 'Customer', 'John', 'Doe', '0987654321', '456 Elm St');
+
+-- Thêm Customer (Liên kết với user_id của customer)
+INSERT INTO Customer (user_id, loyalty_points, preferred_payment_method, delivery_address)
+VALUES 
+(2, 100, 'Credit Card', '456 Elm St');
+
+-- Thêm Admins (Liên kết với user_id của admin)
+INSERT INTO Admins (user_id, role)
+VALUES 
+(1, 'Super Admin');
+
+
+SELECT * FROM Users WHERE email = 'admin@example.com'; 
+
+INSERT INTO Products (name, price, image_url)
+VALUES 
+('Lenovo V15 G4 IRU 83A100G0VN', 15000000, 'img/83A100G0VN-thumb.jpg'),
+('Laptop HP 15s fq5231TU 8U241PA', 10500000, 'img/8U241PA-thumb.jpg'),
+('Laptop ASUS Vivobook 15 X1504ZA-NJ517W', 12500000, 'img/X1504ZA-NJ517W-thumb.jpg'),
+('Acer Aspire 3 A315-58-358E', 14000000, 'img/acer-aspire-3-a315-58-bac-dd.jpg'),
+('Laptop Asus Vivobook E1404FA-NK186W', 13500000, 'img/asus-vivobook-e1404fa-nk186w-r5-7520u-den-5.jpg'),
+('Laptop Asus VivoBook 14 X1404ZA-NK075W', 11000000, 'img/asus-vivobook-x1404za-nk075w-i3-1215u-xanh-dd.jpg'),
+('ASUS Vivobook 15 (X1504)', 13000000, 'img/asus-vivobook-x1504-bac-dd.jpg'),
+('Huawei MateBook D15', 18000000, 'img/huawei-bom-wfp9i-matebook-d15-r7-5700u-bac-dd.jpg'),
+('Laptop Huawei MateBook D14 BE i3', 14500000, 'img/huawei-ytfz-x-matebook-d14-be-i3-1215u-bac-dd.jpg'),
+('Laptop Lenovo Ideapad Slim 3 15IRH8 i7 13620H', 17000000, 'img/lenovo-ideapad-slim-3-15irh8-i7-13620h-dd.jpg'),
+('Macbook Air M2 2022', 30000000, 'img/macbook-air-m2-2022-den-dd.jpg'),
+('Macbook Air M2 2023 15 inch 8GB 256GB', 35000000, 'img/macbook-air-m2-2023-15-inch-bac-dd.jpg'),
+('Laptop MSI Modern 14 C13M', 17500000, 'img/msi-modern-14-c13m-den-dd-icon.jpg');
+
