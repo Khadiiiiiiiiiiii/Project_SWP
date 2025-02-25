@@ -4,6 +4,7 @@ public class User {
 
     private int userId;
     private String email;
+    private String password; // Thêm trường này
     private String role;
     private String firstName;
     private String lastName;
@@ -25,6 +26,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() { // Getter cho password
+        return password;
+    }
+
+    public void setPassword(String password) { // Setter cho password
+        this.password = password;
     }
 
     public String getRole() {

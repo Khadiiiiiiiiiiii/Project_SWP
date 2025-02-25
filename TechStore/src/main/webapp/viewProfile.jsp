@@ -2,72 +2,112 @@
 <%@ page import="com.mvc.model.User" %>
 
 <%
-    // Kiểm tra session
     if (session == null || session.getAttribute("user") == null) {
-        response.sendRedirect("login.jsp"); // Chưa đăng nhập -> chuyển về trang đăng nhập
+        response.sendRedirect("login.jsp");
         return;
     }
 
-    // Lấy thông tin user từ session
     User user = (User) session.getAttribute("user");
-    String successMessage = request.getParameter("success");
-    String errorMessage = request.getParameter("error");
+
+    String successMessage = (String) request.getAttribute("successMessage");
+    String errorMessage = (String) request.getAttribute("errorMessage");
+
+    String fullName = (String) request.getAttribute("name");
+    String phone = (String) request.getAttribute("phone");
+    String address = (String) request.getAttribute("address");
+
+    if (fullName == null) fullName = user.getFirstName() + " " + user.getLastName();
+    if (phone == null) phone = user.getPhone() != null ? user.getPhone() : "";
+    if (address == null) address = user.getAddress() != null ? user.getAddress() : "";
 %>
 
 <!DOCTYPE html>
 <html lang="vi">
     <head>
         <meta charset="UTF-8">
-        <title>Thông tin cá nhân</title>
-        <link rel="stylesheet" href="CSS/viewProfile.css">
+        <title>Account Information</title>
+        <link rel="stylesheet" href="./CSS/viewProfile.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     </head>
-    <body>
+    <body class="banner-background profile-page">
+        <img src='./img/banner.jpg' class='banner'>
 
         <%@ include file="navbar.jsp" %> 
 
         <div class="profile-container">
+            <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="user-info">
                     <i class="fa-solid fa-user-circle user-icon"></i>
                     <p class="user-name"><%= user.getFirstName() %> <%= user.getLastName() %></p>
                 </div>
                 <nav class="menu">
-                    <a href="viewProfile.jsp" class="active">Account Information</a>
-                    <a href="viewAddress.jsp">Address</a>
-                    <a href="#">Order History</a>
-                    <a href="#">Track Order</a>
-                    <a href="/logout" class="logout">Log out</a>
+                    <a href="viewProfile.jsp" class="active">
+                        <i class="fa-solid fa-user" style="padding-right: 5px;"></i>Account Information
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-cart-shopping" style="padding-right: 5px;"></i>Order History
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-truck-fast" style="padding-right: 5px;"></i>Track Order
+                    </a>
+                    <a href="/logout" class="logout">
+                        <i class="fa-solid fa-right-from-bracket" style="padding-right: 5px;"></i>Log out
+                    </a>
                 </nav>
             </aside>
 
+            <!-- Profile Content -->
             <main class="profile-content">
                 <h2>Account Information</h2>
 
-                <%-- Hiển thị thông báo thành công hoặc lỗi --%>
-                <% if ("true".equals(successMessage)) { %>
-                <p class="success-message">Profile updated successfully!</p>
-                <% } else if ("update_failed".equals(errorMessage)) { %>
-                <p class="error-message">Update failed. Please try again.</p>
-                <% } else if ("server_error".equals(errorMessage)) { %>
-                <p class="error-message">Server error. Please contact support.</p>
+                <% if (successMessage != null) { %>
+                <p class="success-message"><%= successMessage %></p>
                 <% } %>
 
-                <form action="update" method="post">
-                    <label>Name:</label>
-                    <input type="text" name="name" value="<%= user.getFirstName() %> <%= user.getLastName() %>" required>
+                <% if (errorMessage != null) { %>
+                <p class="error-message"><%= errorMessage %></p>
+                <% } %>
 
-                    <label>Phone Number:</label>
-                    <input type="text" name="phone" value="<%= user.getPhone() != null ? user.getPhone() : "" %>" required>
+                <form action="update" method="post" class="viewForm">
+                    <div class="viewLabel">
+                        <label>Name:</label>
+                    </div>
+                    <div class="viewInput">
+                        <input type="text" name="name" value="<%= fullName %>" required>
+                    </div>
 
-                    <label>Address:</label>
-                    <input type="text" name="address" value="<%= user.getAddress() != null ? user.getAddress() : "" %>">
+                    <div class="viewLabel">
+                        <label>Phone Number:</label>
+                    </div>
+                    <div class="viewInput">
+                        <input type="text" name="phone" value="<%= phone %>" required>
+                    </div>
 
-                    <label>Email:</label>
-                    <input type="email" name="email" value="<%= user.getEmail() %>" readonly>
+                    <div class="viewLabel">
+                        <label>Address:</label>
+                    </div>
+                    <div class="viewInput">
+                        <input type="text" name="address" value="<%= address %>">
+                    </div>
+
+                    <div class="viewLabel">
+                        <label>Email:</label>
+                    </div>
+                    <div class="viewInput">
+                        <input type="email" name="email" value="<%= user.getEmail() %>" required>
+                    </div>
+
+                    <a href="changePassword.jsp" class="changePass" 
+                       style="color: #33ccff; text-decoration: none; transition: color 0.3s ease;"
+                       onmouseover="this.style.color = '#ff6600'" 
+                       onmouseout="this.style.color = '#33ccff'">
+                        Click here to change password!
+                    </a>
 
                     <div class="buttons">
                         <button type="submit" class="save-btn">Save Change</button>
+
                         <form id="deleteForm" action="deleteAccount" method="post">
                             <button type="button" class="delete-btn" onclick="confirmDelete()">Delete Account</button>
                         </form>
@@ -75,7 +115,7 @@
 
                     <script>
                         function confirmDelete() {
-                            if (confirm("Bạn có chắc chắn muốn xóa tài khoản không?")) {
+                            if (confirm("Are you sure to delete this account?")) {
                                 document.getElementById("deleteForm").submit();
                             }
                         }

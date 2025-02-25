@@ -1,36 +1,42 @@
-/* Reset cơ bản */
-* {
+/* Định danh chung cho trang */
+.profile-page * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
-/* --- Background Ảnh Banner --- */
-body {
-    background: url('../img/banner.jpg') no-repeat center center/cover;
-    color: white;
+/* Background chung */
+.profile-page .banner-background {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
-/* --- Profile Container --- */
-.profile-container {
+/* Hình nền */
+.profile-page img.banner {
+    position: fixed;
+    width: 100%;
+    height: auto;
+}
+
+/* Container chính */
+.profile-page .profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 100px; /* Để tránh navbar che mất */
+    padding-top: 100px;
     gap: 30px;
 }
 
-/* --- Sidebar (Bên trái) --- */
-.sidebar {
+/* --- Sidebar --- */
+.profile-page .sidebar {
     width: 270px;
     height: 520px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px); /* Hiệu ứng mờ */
+    backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 20px;
     display: flex;
@@ -40,28 +46,28 @@ body {
     transition: 0.3s;
 }
 
-.user-info {
+.profile-page .user-info {
     text-align: center;
     margin-bottom: 25px;
 }
 
-.user-icon {
+.profile-page .user-icon {
     font-size: 70px;
     color: white;
 }
 
-.user-name {
+.profile-page .user-name {
     font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
 }
 
 /* --- Menu Sidebar --- */
-.menu {
+.profile-page .menu {
     width: 100%;
 }
 
-.menu a {
+.profile-page .menu a {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -74,24 +80,24 @@ body {
     font-weight: 500;
 }
 
-.menu a:hover,
-.menu a.active {
+.profile-page .menu a:hover,
+.profile-page .menu a.active {
     background: linear-gradient(90deg, #007bff, #00d4ff);
     color: white;
     transform: scale(1.05);
 }
 
-.menu a.logout {
+.profile-page .menu a.logout {
     color: red;
     font-weight: bold;
     margin-top: 20px;
 }
 
-/* --- Profile Content (Form) giống Sidebar --- */
-.profile-content {
+/* --- Nội dung chính --- */
+.profile-page .profile-content {
     width: 650px;
-    background: rgba(255, 255, 255, 0.15); /* Trong suốt nhẹ */
-    backdrop-filter: blur(15px); /* Hiệu ứng mờ */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
     padding: 35px;
     border-radius: 20px;
     color: white;
@@ -101,7 +107,7 @@ body {
 }
 
 /* --- Tiêu đề --- */
-.profile-content h2 {
+.profile-page .profile-content h2 {
     text-align: center;
     font-size: 26px;
     font-weight: bold;
@@ -110,61 +116,61 @@ body {
 }
 
 /* --- Form Input --- */
-form {
+.profile-page .viewForm {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.profile-page .viewLabel {
     font-size: 17px;
     font-weight: bold;
     margin-bottom: 6px;
     color: white;
 }
 
-input,
-select {
+.profile-page .viewInput input,
+.profile-page .viewInput select {
     width: 100%;
     padding: 12px;
     margin-bottom: 12px;
     border-radius: 8px;
     border: none;
-    background: rgba(255, 255, 255, 0.2); /* Trong suốt */
+    background: rgba(255, 255, 255, 0.2);
     color: white;
     font-size: 15px;
     transition: 0.3s;
 }
 
-input::placeholder,
-select {
+.profile-page .viewInput input::placeholder,
+.profile-page .viewInput select {
     color: rgba(255, 255, 255, 0.7);
 }
 
-input:focus,
-select:focus {
+.profile-page .viewInput input:focus,
+.profile-page .viewInput select:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* --- Date of Birth (Dropdown) --- */
-.dob {
+.profile-page .dob {
     display: flex;
     gap: 12px;
 }
 
-.dob select {
+.profile-page .dob select {
     width: 33%;
 }
 
 /* --- Buttons --- */
-.buttons {
+.profile-page .buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
 }
 
-.save-btn {
+.profile-page .save-btn {
     background: linear-gradient(90deg, #0056b3, #0094ff);
     padding: 12px 22px;
     border: none;
@@ -177,7 +183,7 @@ select:focus {
     box-shadow: 0 4px 10px rgba(0, 149, 255, 0.4);
 }
 
-.delete-btn {
+.profile-page .delete-btn {
     background: linear-gradient(90deg, #d9534f, #ff3c3c);
     padding: 12px 22px;
     border: none;
@@ -190,12 +196,33 @@ select:focus {
     box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
 }
 
-.save-btn:hover {
+.profile-page .save-btn:hover {
     background: linear-gradient(90deg, #004494, #007bff);
     transform: scale(1.05);
 }
 
-.delete-btn:hover {
+.profile-page .delete-btn:hover {
     background: linear-gradient(90deg, #b52b27, #ff1a1a);
     transform: scale(1.05);
+}
+
+/* Thông báo thành công và lỗi */
+.profile-page .success-message {
+    color: green !important;
+    font-weight: bold;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.profile-page .error-message {
+    color: red !important;
+    font-weight: bold;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
 }

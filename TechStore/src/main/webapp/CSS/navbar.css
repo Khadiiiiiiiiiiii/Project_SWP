@@ -78,7 +78,7 @@
 .search-bar {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2); /* Làm mờ nhẹ */
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 5px 15px;
 }

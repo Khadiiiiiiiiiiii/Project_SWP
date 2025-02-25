@@ -26,15 +26,13 @@
                     <input type="password" name="password" placeholder="Enter password..." required>
                 </div>
 
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <a href="forgotPassword.jsp" class="forgot-password">Forgot password?</a>
 
                 <button type="submit" class="login-btn">Login</button>
 
                 <% if (request.getAttribute("errorMessage") != null) { %>
                 <p class="error-message"><%= request.getAttribute("errorMessage") %></p>
                 <% } %>
-
-                <div class="divider">Or login with</div>
 
                 <p class="signup-text">Don't have an account? <a href="register.jsp">Sign up now!</a></p>
             </form>

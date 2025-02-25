@@ -22,7 +22,7 @@ public class UserDAO {
         try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email.trim());
-            stmt.setString(2, password.trim());  // Trong thực tế nên hash password trước
+            stmt.setString(2, password.trim());
 
             try ( ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -45,16 +45,14 @@ public class UserDAO {
         return null;
     }
 
-    // ✅ Thêm phương thức đăng ký chỉ dành cho CUSTOMER
     public boolean register(String email, String password, String firstName, String lastName, String phone, String address) throws SQLException {
         if (email == null || password == null || firstName == null || lastName == null
                 || email.trim().isEmpty() || password.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
             return false;
         }
 
-        // Kiểm tra xem email đã tồn tại chưa
         if (isEmailExist(email)) {
-            return false; // Không cho phép đăng ký nếu email đã tồn tại
+            return false;
         }
 
         String sql = "INSERT INTO Users (email, password_hash, role, first_name, last_name, phone, address) "
@@ -63,7 +61,7 @@ public class UserDAO {
         try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email.trim());
-            stmt.setString(2, password.trim()); // Trong thực tế, cần mã hóa mật khẩu trước khi lưu
+            stmt.setString(2, password.trim());
             stmt.setString(3, firstName.trim());
             stmt.setString(4, lastName.trim());
             stmt.setString(5, phone != null ? phone.trim() : null);
@@ -77,8 +75,7 @@ public class UserDAO {
         }
     }
 
-    // ✅ Phương thức kiểm tra email đã tồn tại chưa
-    private boolean isEmailExist(String email) throws SQLException {
+    public boolean isEmailExist(String email) throws SQLException {
         String sql = "SELECT email FROM Users WHERE email = ?";
 
         try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -86,19 +83,17 @@ public class UserDAO {
             stmt.setString(1, email.trim());
 
             try ( ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); // Nếu có dữ liệu, email đã tồn tại
+                return rs.next();
             }
         }
     }
 
     public User findOrCreateGoogleUser(String email, String firstName, String lastName) throws SQLException {
-        // First try to find existing user
         User existingUser = findUserByEmail(email);
         if (existingUser != null) {
             return existingUser;
         }
 
-        // If user doesn't exist, create new one
         String sql = "INSERT INTO Users (email, role, first_name, last_name) VALUES (?, 'customer', ?, ?)";
         try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -124,31 +119,9 @@ public class UserDAO {
         return null;
     }
 
-    public User findUserByEmail(String email) throws SQLException {
-        String sql = "SELECT user_id, email, role, first_name, last_name, phone, address FROM Users WHERE email = ?";
-        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, email);
-            try ( ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    User user = new User();
-                    user.setUserId(rs.getInt("user_id"));
-                    user.setEmail(rs.getString("email"));
-                    user.setRole(rs.getString("role"));
-                    user.setFirstName(rs.getString("first_name"));
-                    user.setLastName(rs.getString("last_name"));
-                    user.setPhone(rs.getString("phone"));
-                    user.setAddress(rs.getString("address"));
-                    return user;
-                }
-            }
-        }
-        return null;
-    }
-
     public boolean updateProfile(int userId, String firstName, String lastName, String phone, String address) throws SQLException {
         if (firstName == null || lastName == null || firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
-            return false; // Bắt buộc có tên
+            return false;
         }
 
         String sql = "UPDATE Users SET first_name = ?, last_name = ?, phone = ?, address = ? WHERE user_id = ?";
@@ -175,6 +148,94 @@ public class UserDAO {
         try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
+            return stmt.executeUpdate() > 0;
+        }
+    }
+
+    public User findUserByEmail(String email) throws SQLException {
+        String sql = "SELECT user_id, email, role, first_name, last_name, phone, address FROM Users WHERE email = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setUserId(rs.getInt("user_id"));
+                    user.setEmail(rs.getString("email"));
+                    user.setRole(rs.getString("role"));
+                    user.setFirstName(rs.getString("first_name"));
+                    user.setLastName(rs.getString("last_name"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setAddress(rs.getString("address"));
+                    return user;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean validatePassword(String email, String password) throws SQLException {
+        String sql = "SELECT password_hash FROM Users WHERE email = ?";
+
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String storedPassword = rs.getString("password_hash"); // Mật khẩu lấy từ DB
+                return password.equals(storedPassword); // So sánh trực tiếp
+            }
+        }
+        return false; // Trả về false nếu không tìm thấy email
+    }
+
+    public boolean updatePassword(String email, String newPassword) throws SQLException {
+        String sql = "UPDATE Users SET password_hash = ? WHERE email = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newPassword.trim());
+            stmt.setString(2, email.trim());
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        }
+    }
+
+    public User getUserByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM Users WHERE email = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public boolean saveResetToken(String email, String token) throws SQLException {
+        String sql = "UPDATE Users SET reset_token = ? WHERE email = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, token);
+            stmt.setString(2, email);
+            return stmt.executeUpdate() > 0;
+        }
+    }
+
+    public boolean updatePasswordByEmail(String email, String newPassword) throws SQLException {
+        String sql = "UPDATE Users SET password_hash = ? WHERE email = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, newPassword);
+            stmt.setString(2, email);
             return stmt.executeUpdate() > 0;
         }
     }

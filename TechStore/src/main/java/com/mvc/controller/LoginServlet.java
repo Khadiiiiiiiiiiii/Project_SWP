@@ -18,31 +18,40 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        // Validate email format
+        if (email == null || !email.contains("@")) {
+            request.setAttribute("errorMessage", "Invalid email format! Please enter a valid email.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         try {
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.login(email, password);
+            User user = userDAO.findUserByEmail(email); // Check if the account exists
 
-            if (user != null) {
-                // Login successful
+            if (user == null) {
+                // Show error message if account does not exist
+                request.setAttribute("errorMessage", "Account does not exist! Please register if you don't have an account.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else if (!userDAO.validatePassword(email, password)) {
+                request.setAttribute("errorMessage", "Incorrect password! Please try again.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                // Successful login
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
 
                 // Redirect based on role
-                if ("Admin".equals(user.getRole())) {
+                if ("Admin".equalsIgnoreCase(user.getRole())) {
                     response.sendRedirect("admin-dashboard.jsp");
                 } else {
                     response.sendRedirect("Home.jsp");
                 }
-            } else {
-                // Login failed
-                request.setAttribute("error", "Invalid email or password");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {
-            // Log the error
             System.err.println("Login error: " + e.getMessage());
-            request.setAttribute("error", "System error occurred. Please try again later.");
+            request.setAttribute("errorMessage", "System error! Please try again later.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
