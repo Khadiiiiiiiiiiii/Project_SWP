@@ -40,6 +40,26 @@
         <servlet-name>DeleteAccountServlet</servlet-name>
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
+<!--    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.mvc.controller.ProductServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/img/products/*</url-pattern> 
+</servlet-mapping>
+    -->
+    
+<!--    <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/img/*</url-pattern>-->
+<!--</servlet-mapping>-->
+
     <session-config>
         <session-timeout>
             30

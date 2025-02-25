@@ -31,7 +31,7 @@
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0</version>
-            <scope>provided</scope>  <!-- Thêm provided -->
+            <scope>provided</scope>  <!-- ThÃªm provided -->
         </dependency>
 
         <!-- Jakarta JSTL -->
@@ -114,7 +114,7 @@
 
     <build>
         <plugins>
-            <!-- Plugin biên dịch -->
+            <!-- Plugin biÃªn dá»‹ch -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
