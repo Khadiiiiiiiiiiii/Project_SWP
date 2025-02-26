@@ -42,8 +42,12 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
 
                 // Redirect based on role
-                if ("Admin".equalsIgnoreCase(user.getRole())) {
+                if ("Admin".equalsIgnoreCase(user.getRole()) || "admin".equalsIgnoreCase(user.getRole())) {
                     response.sendRedirect("admin-dashboard.jsp");
+                } else if ("staff".equalsIgnoreCase(user.getRole()) || "Staff".equalsIgnoreCase(user.getRole())) {
+                    response.sendRedirect("staff-dashboard.jsp");
+                } else if ("sm".equalsIgnoreCase(user.getRole()) || "SM".equalsIgnoreCase(user.getRole())) {
+                    response.sendRedirect("sm-dashboard.jsp");
                 } else {
                     response.sendRedirect("Home.jsp");
                 }

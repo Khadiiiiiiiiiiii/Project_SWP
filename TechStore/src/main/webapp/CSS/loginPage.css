@@ -160,3 +160,32 @@ input:focus {
 .signup-text a:hover {
     text-decoration: underline;
 }
+
+/* --- Bọc ô nhập mật khẩu --- */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* --- Ô nhập mật khẩu --- */
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Chừa khoảng trống cho icon */
+}
+
+/* --- Icon hiển thị/ẩn mật khẩu --- */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.3s;
+}
+
+.password-toggle:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
