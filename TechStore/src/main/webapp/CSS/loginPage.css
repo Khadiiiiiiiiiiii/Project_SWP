@@ -161,31 +161,27 @@ input:focus {
     text-decoration: underline;
 }
 
-/* --- Bọc ô nhập mật khẩu --- */
+/* Password Wrapper */
 .password-wrapper {
     position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
-/* --- Ô nhập mật khẩu --- */
 .password-wrapper input {
     width: 100%;
-    padding-right: 40px; /* Chừa khoảng trống cho icon */
+    padding-right: 40px; /* Chừa chỗ cho icon */
 }
 
-/* --- Icon hiển thị/ẩn mật khẩu --- */
-.password-toggle {
+/* Toggle Password Icon */
+.toggle-password {
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
     cursor: pointer;
-    font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
-    transition: 0.3s;
+    transition: color 0.3s;
 }
 
-.password-toggle:hover {
-    color: rgba(255, 255, 255, 1);
+.toggle-password:hover {
+    color: white;
 }
-

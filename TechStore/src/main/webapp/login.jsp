@@ -18,14 +18,16 @@
             <form action="login" method="post">
                 <div class="input-group">
                     <label>Email:</label>
-                    <input type="email" name="email" placeholder="Enter email..." required>
+                    <input type="email" name="email" placeholder="Enter username..." required>
                 </div>
 
                 <div class="input-group">
                     <label>Password:</label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Enter password" required>
-                        <i class="fa-solid fa-eye-slash password-toggle" onclick="togglePassword('password', this)"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter password..." required>
+                        <span class="toggle-password">
+                            <i class="fa fa-eye-slash"></i>
+                        </span>
                     </div>
                 </div>
 
@@ -42,20 +44,20 @@
         </div>
 
         <script>
-            function togglePassword(inputId, iconElement) {
-                let input = document.getElementById(inputId);
-                if (input.type === "password") {
-                    input.type = "text";
-                    iconElement.classList.remove("fa-eye-slash");
-                    iconElement.classList.add("fa-eye");
+            document.querySelector(".toggle-password").addEventListener("click", function () {
+                let passwordInput = document.getElementById("password");
+                let icon = this.querySelector("i");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
                 } else {
-                    input.type = "password";
-                    iconElement.classList.remove("fa-eye");
-                    iconElement.classList.add("fa-eye-slash");
+                    passwordInput.type = "password";
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
                 }
-            }
-
+            });
         </script>
-
     </body>
 </html>

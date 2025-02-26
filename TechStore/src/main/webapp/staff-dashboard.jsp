@@ -4,8 +4,8 @@
 
 <% 
     List<User> customers = (List<User>) request.getAttribute("customers");
+    System.out.println("JSP received customers: " + (customers != null ? customers.size() : "NULL"));
 %>
-
 <html>
     <head>
         <title>Staff Dashboard</title>
@@ -43,12 +43,6 @@
             <h2>Staff Dashboard</h2>
             <button class="logout-btn" onclick="window.location.href = 'logout'">Logout</button>
             <h3>Customer Management</h3>
-
-            <% if (customers == null) { %>
-            <p style="color:red;">Error: Customer data is NULL. Make sure to access the servlet first.</p>
-            <% } else { %>
-            <p>Total Customers: <%= customers.size() %></p>
-            <% } %>
 
             <table>
                 <tr>

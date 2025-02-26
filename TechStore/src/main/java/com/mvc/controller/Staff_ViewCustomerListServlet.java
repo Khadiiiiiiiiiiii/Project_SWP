@@ -3,6 +3,7 @@ package com.mvc.controller;
 import com.mvc.DAO.StaffDAO;
 import com.mvc.model.User;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ public class Staff_ViewCustomerListServlet extends HttpServlet {
             }
 
             request.setAttribute("customers", customers);
-            request.getRequestDispatcher("./staff-dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("staff-dashboard.jsp").forward(request, response);
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error in Staff_ViewCustomerListServlet: " + e.getMessage(), e);
