@@ -17,46 +17,64 @@ public class ProductDAO {
         System.out.println("ProductDAO initialized. Connection: " + (conn != null ? "Established" : "Null"));
     }
 
+    // Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM Products";
-        
+
         try {
-            System.out.println("Executing query: " + sql);
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setPrice(rs.getBigDecimal("price"));
-                product.setDiscountPrice(rs.getBigDecimal("discount_price"));
-                product.setCategoryId(rs.getInt("category_id"));
-                product.setStockQuantity(rs.getInt("stock_quantity"));
-                product.setImageUrl(rs.getString("image_url"));
-                product.setCreatedAt(rs.getTimestamp("created_at"));
-                product.setUpdatedAt(rs.getTimestamp("updated_at"));
-                product.setPromotionId(rs.getInt("promotion_id") == 0 ? null : rs.getInt("promotion_id"));
-                
+                Product product = new Product(
+                    rs.getInt("product_id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getBigDecimal("price"),
+                    rs.getBigDecimal("discount_price"),
+                    rs.getInt("category_id"),
+                    rs.getInt("stock_quantity"),
+                    rs.getString("image_url"),
+                    rs.getTimestamp("created_at"),
+                    rs.getTimestamp("updated_at"),
+                    rs.getInt("promotion_id")
+                );
                 products.add(product);
-                System.out.println("Added product: " + product.getName() + " - Price: " + product.getPrice());
             }
-            System.out.println("Total products retrieved: " + products.size());
         } catch (SQLException e) {
-            System.out.println("Error executing query: " + e.getMessage());
             e.printStackTrace();
         }
         return products;
     }
 
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        List<Product> products = dao.getAllProducts();
-        System.out.println("Test result - Total products: " + products.size());
-        for (Product p : products) {
-            System.out.println("Product: " + p.getName() + " - Price: " + p.getPrice());
+    public Product getProductById(int productId) {
+        Product product = null;
+        String query = "SELECT * FROM Products WHERE product_id = ?";
+        
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                product = new Product(
+                    rs.getInt("product_id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getBigDecimal("price") != null ? rs.getBigDecimal("price") : null,
+                    rs.getBigDecimal("discount_price") != null ? rs.getBigDecimal("discount_price") : null,
+                    rs.getInt("category_id"),
+                    rs.getInt("stock_quantity"),
+                    rs.getString("image_url"),
+                    rs.getTimestamp("created_at"),
+                    rs.getTimestamp("updated_at"),
+                    rs.getInt("promotion_id") == 0 ? null : rs.getInt("promotion_id")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return product;
     }
 }

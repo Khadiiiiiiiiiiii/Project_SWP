@@ -22,9 +22,9 @@
 <body>
 
     <%@ include file="navbar.jsp" %>
-<div class="banner-container">
-    <img src="img/banner.jpg" alt="banner">
-</div>
+    <div class="banner-container">
+        <img src="img/banner.jpg" alt="banner">
+    </div>
     <div class="container">
         <!-- Sidebar Categories -->
         <aside class="category-sidebar">
@@ -48,13 +48,16 @@
                         <c:forEach var="product" items="${productList}" varStatus="loop">
                             <c:if test="${loop.index < 4}">
                                 <div class="product-item">
-                                    <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}">
-                                    <h3>${product.name}</h3>
-                                    <p class="price">${product.price} VND</p>
-                                    <c:if test="${not empty product.discountPrice}">
-                                        <p class="discount">-${product.discountPrice}%</p>
-                                    </c:if>
-                                    <button class="buy-btn">Buy Now</button>
+                                    <!-- Link đến trang chi tiết sản phẩm -->
+                                    <a href="productDetail.jsp?productId=${product.productId}">
+                                        <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}">
+                                        <h3>${product.name}</h3>
+                                        <p class="price">${product.price} VND</p>
+                                        <c:if test="${not empty product.discountPrice}">
+                                            <p class="discount">-${product.discountPrice}%</p>
+                                        </c:if>
+                                    </a>
+                                    
                                 </div>
                             </c:if>
                         </c:forEach>
@@ -72,13 +75,16 @@
                         <c:forEach var="product" items="${productList}" varStatus="loop">
                             <c:if test="${loop.index >= 4}">
                                 <div class="product-item">
-                                    <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}">
-                                    <h3>${product.name}</h3>
-                                    <p class="price">${product.price} VND</p>
-                                    <c:if test="${not empty product.discountPrice}">
-                                        <p class="discount">-${product.discountPrice}%</p>
-                                    </c:if>
-                                    <button class="buy-btn">Buy Now</button>
+                                    <!-- Link đến trang chi tiết sản phẩm -->
+                                    <a href="productDetail.jsp?productId=${product.productId}">
+                                        <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}">
+                                        <h3>${product.name}</h3>
+                                        <p class="price">${product.price} VND</p>
+                                        <c:if test="${not empty product.discountPrice}">
+                                            <p class="discount">-${product.discountPrice}%</p>
+                                        </c:if>
+                                    </a>
+                                   
                                 </div>
                             </c:if>
                         </c:forEach>
