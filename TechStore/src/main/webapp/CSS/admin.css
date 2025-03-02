@@ -1,0 +1,152 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Background */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #24252a;
+    padding: 20px 10%;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+}
+
+nav ul li:hover {
+    color: rgb(224, 53, 110);
+    border-bottom: 2px solid yellow;
+}
+
+
+
+/* Content Section */
+.content {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: none;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Create Button */
+.btn.create-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn.create-btn:hover {
+    background-color: #218838;
+}
+/* Kiểu chung của tất cả các nút */
+.btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: rgb(224, 53, 110);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+/* Hover */
+.btn:hover {
+    background-color: rgb(200, 40, 90);
+    transform: scale(1.05);
+}
+
+/* Chỉnh riêng cho Logout */
+.btn.logout {
+    background-color: #e63565; 
+}
+
+/* Hover cho Logout */
+.btn.logout:hover {
+    background-color: #d02050;
+}
+
+/* Ngăn chặn màu tím khi đã truy cập */
+.btn.logout:visited {
+    color: white;
+}
+
+
+/* Nút Create Staff */
+.btn.create-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #dc3545; 
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn.create-btn:hover {
+    background-color: #c82333; 
+    box-shadow: 2px 2px 10px rgba(200, 35, 51, 0.5);
+}
