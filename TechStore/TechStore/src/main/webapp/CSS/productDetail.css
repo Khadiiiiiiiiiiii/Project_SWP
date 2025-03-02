@@ -1,0 +1,183 @@
+/* productDetail.css */
+
+/* Định dạng body với banner làm nền */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Định dạng banner làm nền toàn trang */
+.banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Đặt banner phía sau nội dung */
+    object-fit: cover;
+}
+
+/* Định dạng container chính */
+.container {
+    max-width: 1200px;
+    margin: 100px auto 20px; /* Giữ khoảng cách với navbar */
+    padding: 20px;
+    background-color: #fff; /* Nền trắng cho container để nổi bật trên nền banner */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: relative; /* Đảm bảo container nằm trên banner */
+    z-index: 1; /* Đặt container phía trước banner */
+    color: #000; /* Màu chữ đen cho toàn bộ nội dung trong container */
+}
+
+/* Toàn bộ phần chi tiết sản phẩm */
+.product-detail {
+    display: flex;
+    align-items: flex-start; /* Căn trên cùng để nút không bị lệch */
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+}
+
+/* Hình ảnh sản phẩm */
+.product-detail img {
+    width: 300px;
+    height: 200px;
+    object-fit: contain;
+    border: none;
+    margin: 0;
+}
+
+/* Phần thông tin sản phẩm (tên, giá, và nút) */
+.product-info {
+    flex: 1;
+    margin: 0;
+    padding: 10px;
+}
+
+.product-info h3 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    color: #000; /* Tên sản phẩm màu đen */
+}
+
+.product-info .price {
+    font-size: 18px;
+    margin: 10px 0 20px; /* Tăng khoảng cách dưới giá để tạo không gian cho nút */
+    color: #ff0000; /* Giá màu đỏ */
+}
+
+.product-info .price del {
+    color: #888;
+    margin-right: 10px;
+}
+
+.product-info .price .discount {
+    color: #888;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+/* Phần nút và số lượng */
+.product-actions {
+    margin-top: 10px; /* Giảm khoảng cách trên để nút gần giá hơn */
+    margin-bottom: 20px; /* Tăng khoảng cách dưới để tách với bảng */
+}
+
+label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #000; /* Chữ đen cho label */
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    margin-right: 10px;
+}
+
+.add-cart-btn, button[type="button"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.add-cart-btn {
+    background-color: #007bff; /* Nút "Add to Cart" màu xanh biển */
+    color: #fff;
+}
+
+.add-cart-btn:hover {
+    background-color: #0056b3; /* Màu xanh biển đậm hơn khi hover */
+}
+
+button[type="button"] {
+    background-color: #ff0000; /* Nút "Buy Now" màu đỏ */
+    color: #fff;
+}
+
+button[type="button"]:hover {
+    background-color: #cc0000; /* Màu đỏ đậm hơn khi hover */
+}
+
+/* Bảng thông tin sản phẩm */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff; /* Nền trắng cho bảng */
+    color: #000; /* Chữ đen trong bảng */
+    border: 1px solid #ccc; /* Viền xám nhạt cho bảng */
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc; /* Thêm đường kẻ giữa các ô */
+}
+
+th {
+    background-color: #444; /* Nền xám đậm cho header */
+    font-weight: bold;
+    color: #fff; /* Chữ trắng trong header bảng */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .product-info, .product-actions {
+        width: 100%;
+    }
+
+    .container {
+        margin: 60px auto 10px; /* Giảm margin-top một chút cho màn hình nhỏ */
+        padding: 10px;
+    }
+
+    .product-detail img {
+        width: 100%;
+        height: auto;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .banner {
+        height: auto; /* Điều chỉnh chiều cao banner cho responsive */
+    }
+}
