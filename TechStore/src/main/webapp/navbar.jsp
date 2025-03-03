@@ -13,7 +13,7 @@
     <div class="nav-container">
         <div class="nav-links">
             <a href="Home.jsp" class="<%= currentPage.contains("Home.jsp") ? "active" : "" %>">Home</a>
-            <a href="Product.jsp" class="<%= currentPage.contains("Product.jsp") ? "active" : "" %>">Product</a>
+            <a href="products.jsp" class="<%= currentPage.contains("products.jsp") ? "active" : "" %>">Product</a>
             <a href="About.jsp" class="<%= currentPage.contains("About.jsp") ? "active" : "" %>">About</a>
             <a href="Contact.jsp" class="<%= currentPage.contains("Contact.jsp") ? "active" : "" %>">Contact</a>
         </div>

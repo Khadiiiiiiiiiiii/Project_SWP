@@ -1,0 +1,172 @@
+/* Tổng thể */
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(to right, #0033cc, #001166);
+    color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+.sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 15px;
+    display: block;
+    border-radius: 8px;
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.sidebar a:hover, .active {
+    background: linear-gradient(45deg, #0044ff, #00bfff);
+    transform: translateX(5px);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Container chính */
+.container {
+    flex-grow: 1;
+    padding: 25px;
+    background: white;
+    margin: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Bảng dữ liệu */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    text-align: center;
+    background:  #2980b9;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+tr:hover {
+    background-color: #eaf6ff;
+}
+
+/* Liên kết chi tiết khách hàng */
+.Cus_Details {
+    text-decoration: none;
+    color: #007aff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.Cus_Details:hover {
+    color: #0033cc;
+}
+
+/* Nhóm nút */
+.button_gr {
+    margin-top: 15px;
+    justify-content: center;
+    display: flex;
+    gap: 15px;
+}
+
+/* Nút hành động */
+.edit_button, .delete_button, .view_button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.edit_button {
+    background: #2ecc71;
+    color: white;
+}
+.delete_button {
+    background: #e74c3c;
+    color: white;
+}
+.view_button {
+    background: #007bff;
+    color: white;
+}
+
+/* Hiệu ứng hover nút */
+.edit_button:hover {
+    background: #27ae60;
+    transform: scale(1.06);
+}
+.delete_button:hover {
+    background: #c0392b;
+    transform: scale(1.06);
+}
+.view_button:hover {
+    background: #0056b3;
+    transform: scale(1.06);
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.popup.success .popup-content {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.popup.error .popup-content {
+    background-color: #f44336;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.add-new-btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.add-new-btn:hover {
+    background-color: #45a049;
+}

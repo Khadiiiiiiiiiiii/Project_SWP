@@ -11,6 +11,20 @@ public class User {
     private String phone;
     private String address;
 
+    public User(int userId, String email, String password, String role, String firstName, String lastName, String phone, String address) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public User() {
+    }
+
     // Getters and Setters
     public int getUserId() {
         return userId;
