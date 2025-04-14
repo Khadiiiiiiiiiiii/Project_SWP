@@ -23,39 +23,31 @@ public class updateStaffController extends HttpServlet {
         try {
             String method = request.getMethod();
             if (method.equalsIgnoreCase("GET")) {
-                // Lấy staffId từ query parameter
+                // Xử lý GET request (giữ nguyên như cũ)
                 String staffIdRaw = request.getParameter("staffId");
                 System.out.println("updateStaffController: GET - staffIdRaw=" + staffIdRaw);
 
                 if (staffIdRaw == null || staffIdRaw.trim().isEmpty()) {
-                    System.out.println("updateStaffController: GET - Invalid staffIdRaw");
-                    request.setAttribute("err", "Staff ID không hợp lệ. Vui lòng kiểm tra lại.");
+                    request.setAttribute("err", "Invalid Staff ID.");
                     url = "admin-dashboard.jsp";
                 } else {
                     try {
                         int staffId = Integer.parseInt(staffIdRaw);
                         try (Connection conn = DBContext.getConnection()) {
-                            if (conn == null) {
-                                throw new SQLException("Không thể kết nối đến database: Kết nối trả về null");
-                            }
                             StaffDAO staffDAO = new StaffDAO(conn);
                             staff = staffDAO.getStaffById(staffId);
                             if (staff == null) {
-                                System.out.println("updateStaffController: GET - Staff not found for staffId=" + staffId);
-                                request.setAttribute("err", "Không tìm thấy nhân viên với ID: " + staffId);
+                                request.setAttribute("err", "Staff not found with ID: " + staffId);
                                 url = "admin-dashboard.jsp";
                             } else {
-                                System.out.println("updateStaffController: GET - Staff found: " + staff.getFirst_name() + " " + staff.getLast_name());
                                 request.setAttribute("staff", staff);
                             }
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("updateStaffController: GET - Invalid staffId format - " + e.getMessage());
-                        request.setAttribute("err", "Staff ID không phải là một số hợp lệ.");
+                        request.setAttribute("err", "Staff ID must be a valid number.");
                         url = "admin-dashboard.jsp";
                     } catch (SQLException e) {
-                        System.out.println("updateStaffController: GET - Database error - " + e.getMessage());
-                        request.setAttribute("err", "Lỗi khi lấy thông tin nhân viên: " + e.getMessage());
+                        request.setAttribute("err", "Database error: " + e.getMessage());
                         url = "admin-dashboard.jsp";
                     }
                 }
@@ -69,7 +61,7 @@ public class updateStaffController extends HttpServlet {
                 String phone = request.getParameter("txtphone");
                 String address = request.getParameter("txtaddress");
 
-                // Log chi tiết từng tham số
+                // Log thông tin
                 System.out.println("updateStaffController: POST - Form data:");
                 System.out.println("staffIdRaw=" + staffIdRaw);
                 System.out.println("firstName=" + firstName);
@@ -79,101 +71,105 @@ public class updateStaffController extends HttpServlet {
                 System.out.println("phone=" + phone);
                 System.out.println("address=" + address);
 
-                // Kiểm tra staffIdRaw trước
-                if (staffIdRaw == null || staffIdRaw.trim().isEmpty()) {
-                    System.out.println("updateStaffController: POST - Invalid input - staffIdRaw is null or empty");
-                    request.setAttribute("err", "Staff ID không hợp lệ. Vui lòng kiểm tra lại.");
-                    request.getRequestDispatcher(url).forward(request, response);
-                    return;
-                }
-
+                // Kiểm tra staffId
                 int staffId;
                 try {
                     staffId = Integer.parseInt(staffIdRaw);
                 } catch (NumberFormatException e) {
-                    System.out.println("updateStaffController: POST - Invalid staffId format - " + e.getMessage());
-                    request.setAttribute("err", "Staff ID không phải là một số hợp lệ.");
+                    request.setAttribute("err", "Invalid Staff ID format.");
                     request.getRequestDispatcher(url).forward(request, response);
                     return;
                 }
 
-                // Kiểm tra các trường bắt buộc khác
-                if (firstName == null || firstName.trim().isEmpty() ||
-                    lastName == null || lastName.trim().isEmpty() ||
-                    email == null || email.trim().isEmpty() ||
-                    phone == null || phone.trim().isEmpty() ||
-                    address == null || address.trim().isEmpty()) {
-                    System.out.println("updateStaffController: POST - Invalid input - some required fields are empty");
+                // Biến để theo dõi lỗi
+                boolean hasError = false;
 
-                    // Lấy lại thông tin nhân viên để hiển thị form
-                    try (Connection conn = DBContext.getConnection()) {
-                        if (conn == null) {
-                            throw new SQLException("Không thể kết nối đến database: Kết nối trả về null");
+                // Kiểm tra các trường
+                if (firstName == null || !firstName.matches("^(?!.*\\s{2})[a-zA-Z\\s]{3,50}$")) {
+                    request.setAttribute("errFirstName", "Invalid! First name must be between 3 and 50 characters long and only contain letters.");
+                    hasError = true;
+                }
+
+                if (lastName == null || !lastName.matches("^(?!.*\\s{2})[a-zA-Z\\s]{3,50}$")) {
+                    request.setAttribute("errLastName", "Invalid! Last name must be between 3 and 50 characters long and only contain letters.");
+                    hasError = true;
+                }
+
+                if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.[A-Za-z]{2,}$")) {
+                    request.setAttribute("errEmail", "Invalid email format.");
+                    hasError = true;
+                }
+
+                if (password != null && !password.isEmpty() && !password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@#$%^&+=!]{6,}$")) {
+                    request.setAttribute("errPassword", "Invalid! Password must be at least 6 characters, including at least one letter and one number.");
+                    hasError = true;
+                }
+
+                if (phone == null || !phone.matches("^0\\d{9}$")) {
+                    request.setAttribute("errPhone", "Invalid! Phone number must be 10 digits and start with '0'.");
+                    hasError = true;
+                }
+
+                if (address == null || address.length() < 6 || address.length() > 200) {
+                    request.setAttribute("errAddress", "Invalid! Address must be between 6 and 200 characters.");
+                    hasError = true;
+                }
+
+                // Kiểm tra email và phone tồn tại
+                try (Connection conn = DBContext.getConnection()) {
+                    StaffDAO staffDAO = new StaffDAO(conn);
+                    Staff currentStaff = staffDAO.getStaffById(staffId);
+
+                    // Kiểm tra email nếu thay đổi
+                    if (email != null && !email.equals(currentStaff.getEmail())) {
+                        if (staffDAO.isEmailExists(email)) {
+                            request.setAttribute("errEmail", "Email already exists.");
+                            hasError = true;
                         }
+                    }
+
+                    // Kiểm tra số điện thoại nếu thay đổi
+                    if (phone != null && !phone.equals(currentStaff.getPhone())) {
+                        if (staffDAO.isPhoneExists(phone)) {
+                            request.setAttribute("errPhone", "Phone number already exists.");
+                            hasError = true;
+                        }
+                    }
+
+                    // Nếu có lỗi, lấy lại thông tin nhân viên để hiển thị form
+                    if (hasError) {
+                        staff = staffDAO.getStaffById(staffId);
+                        request.setAttribute("staff", staff);
+                    } else {
+                        // Nếu không có lỗi, tiến hành cập nhật
+                        Staff staffUpdate = new Staff();
+                        staffUpdate.setStaff_id(String.valueOf(staffId));
+                        staffUpdate.setEmail(email.trim());
+                        staffUpdate.setPassword(password != null && !password.trim().isEmpty() ? password.trim() : null);
+                        staffUpdate.setFirst_name(firstName.trim());
+                        staffUpdate.setLast_name(lastName.trim());
+                        staffUpdate.setPhone(phone.trim());
+                        staffUpdate.setAddress(address.trim());
+
+                        boolean updatePassword = password != null && !password.trim().isEmpty();
+                        staffDAO.updateStaff(staffUpdate, updatePassword);
+
+                        request.setAttribute("success", "Staff updated successfully!");
+                        url = "admin";
+                    }
+                } catch (SQLException e) {
+                    System.out.println("updateStaffController: Database error - " + e.getMessage());
+                    request.setAttribute("err", "Database error: " + e.getMessage());
+                    try (Connection conn = DBContext.getConnection()) {
                         StaffDAO staffDAO = new StaffDAO(conn);
                         staff = staffDAO.getStaffById(staffId);
                         request.setAttribute("staff", staff);
-                    } catch (SQLException e) {
-                        System.out.println("updateStaffController: POST - Error fetching staff for retry - " + e.getMessage());
                     }
-
-                    request.setAttribute("err", "Vui lòng nhập đầy đủ các trường bắt buộc.");
-                    request.getRequestDispatcher(url).forward(request, response);
-                    return;
-                }
-
-                try {
-                    boolean updatePassword = password != null && !password.trim().isEmpty();
-
-                    // Tạo đối tượng Staff để cập nhật
-                    Staff staffUpdate = new Staff();
-                    staffUpdate.setStaff_id(String.valueOf(staffId)); // Đảm bảo staff_id là String
-                    staffUpdate.setEmail(email.trim());
-                    staffUpdate.setPassword(updatePassword ? password.trim() : null);
-                    staffUpdate.setFirst_name(firstName.trim());
-                    staffUpdate.setLast_name(lastName.trim());
-                    staffUpdate.setPhone(phone.trim());
-                    staffUpdate.setAddress(address.trim());
-
-                    // Gọi StaffDAO để cập nhật
-                    try (Connection conn = DBContext.getConnection()) {
-                        if (conn == null) {
-                            throw new Exception("Không thể kết nối đến database: Kết nối trả về null");
-                        }
-                        System.out.println("updateStaffController: Database connection established");
-                        StaffDAO staffDAO = new StaffDAO(conn);
-                        staffDAO.updateStaff(staffUpdate, updatePassword);
-
-                        // Redirect về danh sách sau khi cập nhật thành công
-                        request.setAttribute("success", "Cập nhật thông tin nhân viên thành công!");
-                        url = "admin";
-                    } catch (SQLException e) {
-                        System.out.println("updateStaffController: Error updating staff - " + e.getMessage());
-                        e.printStackTrace();
-
-                        // Lấy lại thông tin nhân viên để hiển thị form
-                        try (Connection conn = DBContext.getConnection()) {
-                            if (conn == null) {
-                                throw new SQLException("Không thể kết nối đến database: Kết nối trả về null");
-                            }
-                            StaffDAO staffDAO = new StaffDAO(conn);
-                            staff = staffDAO.getStaffById(staffId);
-                            request.setAttribute("staff", staff);
-                        } catch (SQLException ex) {
-                            System.out.println("updateStaffController: Error fetching staff for retry - " + ex.getMessage());
-                        }
-
-                        request.setAttribute("err", "Lỗi khi cập nhật thông tin nhân viên: " + e.getMessage());
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("updateStaffController: Invalid staffId - " + e.getMessage());
-                    request.setAttribute("err", "Staff ID không hợp lệ.");
                 }
             }
         } catch (Exception e) {
             System.out.println("Error at updateStaffController: " + e.toString());
-            e.printStackTrace();
-            request.setAttribute("err", "Lỗi hệ thống: " + e.getMessage());
+            request.setAttribute("err", "System error: " + e.getMessage());
         } finally {
             System.out.println("updateStaffController: Forwarding to " + url);
             request.getRequestDispatcher(url).forward(request, response);

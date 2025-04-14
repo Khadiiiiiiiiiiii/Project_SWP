@@ -28,6 +28,63 @@
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <servlet-class>com.mvc.controller.ForgotPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DiscountServlet</servlet-name>
+        <servlet-class>com.mvc.controller.DiscountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDiscountServlet</servlet-name>
+        <servlet-class>com.mvc.controller.ProductDiscountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListProductManagement</servlet-name>
+        <servlet-class>com.mvc.controller.ListProductManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addProductManagement</servlet-name>
+        <servlet-class>com.mvc.controller.addProductManagement</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>20971520</max-request-size>
+            <file-size-threshold>5242880</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet>
+        <servlet-name>updateProductManagement</servlet-name>
+        <servlet-class>com.mvc.controller.updateProductManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewServlet</servlet-name>
+        <servlet-class>com.mvc.controller.ReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewProductDetailManagement</servlet-name>
+        <servlet-class>com.mvc.controller.viewProductDetailManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrderManagement</servlet-name>
+        <servlet-class>com.mvc.controller.ListOrderManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderManagementDetailController</servlet-name>
+        <servlet-class>com.mvc.controller.OrderManagementDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProductInOrderController</servlet-name>
+        <servlet-class>com.mvc.controller.ViewProductInOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryOrderServlet</servlet-name>
+        <servlet-class>com.mvc.controller.HistoryOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentCodServlet</servlet-name>
+        <servlet-class>com.mvc.controller.PaymentCodServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrderServlet</servlet-name>
+        <servlet-class>com.mvc.controller.CancelOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -64,10 +121,69 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>com.mvc.controller.CartServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewServlet</servlet-name>
+        <url-pattern>/ReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProductManagement</servlet-name>
+        <url-pattern>/ProductManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addProductManagement</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProductManagement</servlet-name>
+        <url-pattern>/updateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProductDetailManagement</servlet-name>
+        <url-pattern>/viewProductDetailManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrderManagement</servlet-name>
+        <url-pattern>/ListOrderManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderManagementDetailController</servlet-name>
+        <url-pattern>/OrderManagementDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProductInOrderController</servlet-name>
+        <url-pattern>/ViewProductInOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReviewsManagementServlet</servlet-name>
+        <servlet-class>com.mvc.controller.ReviewsManagementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReviewsManagementServlet</servlet-name>
+        <url-pattern>/reviewsManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryOrderServlet</servlet-name>
+        <url-pattern>/historyOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentCodServlet</servlet-name>
+        <url-pattern>/paymentCodServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderServlet</servlet-name>
+        <url-pattern>/cancelOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RecomendServlet</servlet-name>
+        <servlet-class>com.mvc.controller.RecomendServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecomendServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

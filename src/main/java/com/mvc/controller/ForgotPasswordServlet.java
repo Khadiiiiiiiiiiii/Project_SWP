@@ -39,6 +39,13 @@ public class ForgotPasswordServlet extends HttpServlet {
             return;
         }
 
+        // Kiểm tra độ mạnh của mật khẩu
+        if (!isValidPassword(newPassword)) {
+            request.setAttribute("errorMessage", "Password must be at least 6 characters long and contain at least one letter.");
+            request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
+            return;
+        }
+
         try {
             // Kiểm tra email có tồn tại không
             if (!userDAO.isEmailExist(email)) {
@@ -47,13 +54,13 @@ public class ForgotPasswordServlet extends HttpServlet {
                 return;
             }
 
-            // Cập nhật mật khẩu (ở đây bạn có thể thêm mã hóa mật khẩu trước khi cập nhật)
+            // Cập nhật mật khẩu nếu tài khoản không bị vô hiệu hóa
             boolean updated = userDAO.updatePasswordByEmail(email, newPassword);
             if (updated) {
                 request.getSession().setAttribute("successMessage", "Password has been reset successfully. You can now log in.");
                 response.sendRedirect("forgotPassword.jsp");
             } else {
-                request.setAttribute("errorMessage", "Failed to reset password. Please try again.");
+                request.setAttribute("errorMessage", "Your account is disabled. Password reset is not allowed.");
                 request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
             }
         } catch (SQLException e) {
@@ -63,10 +70,15 @@ public class ForgotPasswordServlet extends HttpServlet {
         }
     }
 
-    // Hàm kiểm tra định dạng email hợp lệ
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
     }
+
+// Hàm kiểm tra mật khẩu hợp lệ (ít nhất 6 ký tự, chứa ít nhất 1 chữ cái)
+    private boolean isValidPassword(String password) {
+        return password.length() >= 6 && password.matches(".*[a-zA-Z].*");
+    }
+
 }

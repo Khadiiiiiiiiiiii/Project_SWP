@@ -1,0 +1,149 @@
+/* General styling */
+body.banner-background.profile-page {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 80px;
+    box-sizing: border-box;
+}
+
+.navbar {
+    position: fixed;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 90px;
+    left: -10px;
+    background-color: #f0f0f0;
+    color: #333;
+    width: 250px;
+    padding: 20px;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 3px solid #bbb;
+    position: fixed;
+}
+
+.sidebar .user-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .user-icon {
+    font-size: 80px;
+    color: #555;
+}
+
+.sidebar .user-name {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.sidebar .menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #555;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.sidebar .menu a.active,
+.sidebar .menu a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Main content styling */
+.profile-content {
+    margin-left: 280px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+h2 {
+    color: #555;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input:read-only {
+    background-color: #f0f0f0;
+}
+
+.changePass {
+    display: block;
+    color: red;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.changePass:hover {
+    text-decoration: underline;
+}
+
+button.save-btn,
+button.delete-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button.save-btn {
+    background-color: red;
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+button.save-btn:hover {
+    background-color: #444;
+}
+
+button.delete-btn {
+    background-color: #ddd;
+    color: #333;
+    margin-top: 10px;
+}
+
+button.delete-btn:hover {
+    background-color: #bbb;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: #d40000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}

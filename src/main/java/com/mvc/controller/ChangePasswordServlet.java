@@ -46,6 +46,13 @@ public class ChangePasswordServlet extends HttpServlet {
                 return;
             }
 
+            // Password validation: at least 6 characters and contains at least one letter
+            if (newPassword.length() < 6 || !newPassword.matches(".*[a-zA-Z].*")) {
+                request.setAttribute("errorMessage", "New password must be at least 6 characters long and contain at least one letter.");
+                request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+                return;
+            }
+
             boolean isUpdated = userDAO.updatePassword(user.getEmail(), newPassword);
             if (isUpdated) {
                 User updatedUser = userDAO.getUserByEmail(user.getEmail());

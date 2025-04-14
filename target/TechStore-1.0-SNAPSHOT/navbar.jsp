@@ -1,13 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/navbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/nav.css">
 
 <%
     String currentPage = request.getRequestURI();
 %>
 
 <nav class="navbar">
-    <a href="Home.jsp" class="logo">TECH STORE</a>
+    <a href="Home.jsp" class="logo">
+        <img src="./img/logo.png" alt="logo"/>Tech Store</a>
     <div class="nav-container">
         <div class="nav-links">
             <a href="Home.jsp" class="<%= currentPage.contains("Home.jsp") ? "active" : "" %>">Home</a>
@@ -27,46 +29,7 @@
         <!-- User & Cart Icons -->
         <div class="user-cart">
             <a href="viewProfile.jsp"><i class="fa-solid fa-user"></i></a>
-            <a href="cart.jsp"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="${pageContext.request.contextPath}/CartServlet"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
-
-       <!-- Filter Button -->
-<button class="filter-btn" id="filterToggleBtn"><i class="fa-solid fa-filter"></i> Filter</button>
-
-<!-- Filter Form (Popup) -->
-<div id="filterForm">
-    <form action="/category" method="get"> <!-- Sử dụng đường dẫn tuyệt đối /category -->
-        <input type="hidden" name="category" value="${param.category != null ? param.category : 'all'}">
-        <label for="minPrice">Min Price:</label>
-        <input type="number" id="minPrice" name="minPrice" placeholder="0" value="${param.minPrice}" min="0">
-
-        <label for="maxPrice">Max Price:</label>
-        <input type="number" id="maxPrice" name="maxPrice" placeholder="50000000" value="${param.maxPrice}" min="0">
-
-        <button type="submit">Apply Filter</button>
-    </form>
-</div>
+    </div>
 </nav>
-
-<script>
-    document.getElementById("filterToggleBtn").addEventListener("click", function () {
-        const filterForm = document.getElementById("filterForm");
-        filterForm.classList.toggle("show");
-    });
-
-    // Ngăn nhập số âm hoặc chữ vào input giá
-    document.querySelectorAll("#minPrice, #maxPrice").forEach(input => {
-        input.addEventListener("input", function () {
-            if (this.value < 0) {
-                this.value = "";
-            }
-        });
-    });
-
-    document.addEventListener("click", function (event) {
-        const filterForm = document.getElementById("filterForm");
-        if (!filterForm.contains(event.target) && !event.target.matches("#filterToggleBtn")) {
-            filterForm.classList.remove("show");
-        }
-    });
-</script>

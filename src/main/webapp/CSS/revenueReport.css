@@ -1,0 +1,122 @@
+/* Nhập font Poppins từ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #1e1e2f;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+}
+
+.sidebar nav {
+    flex: 1;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #007bff;
+}
+
+.sidebar nav ul li a.active {
+    background-color: #0056b3;
+}
+
+.sidebar nav ul li a.logout {
+    background-color: #ff4d4d;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a.logout:hover {
+    background-color: #cc0000;
+}
+
+/* Main Content Styles */
+.content {
+    margin-left: 250px; /* Đẩy nội dung sang phải bằng chiều rộng của sidebar */
+    flex-grow: 1;
+    background-color: #f4f6f9; /* Màu nền nhẹ để phân biệt */
+}
+
+/* Summary Card Styles */
+.summary-card {
+    border-left: 4px solid #28a745;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.revenue-card {
+    border-left: 4px solid #007bff;
+}
+
+.orders-card {
+    border-left: 4px solid #fd7e14;
+}
+
+.sales-card {
+    border-left: 4px solid #6f42c1;
+}
+
+/* Filter Section Styles */
+.filter-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}

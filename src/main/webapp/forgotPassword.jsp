@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>Forgot Password</title>
-        <link rel="stylesheet" href="CSS/forgotPassword.css">
+        <link rel="stylesheet" href="CSS/forgotPass.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     </head>
     <body class="reset-body">
 
-        <%@ include file="navbar.jsp" %>
+        <header><%@ include file="navbar.jsp" %></header>
 
         <div class="reset-container">
             <h2 class="reset-title">Reset Password</h2>

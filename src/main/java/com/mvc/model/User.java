@@ -1,17 +1,42 @@
 package com.mvc.model;
 
+import java.sql.Timestamp;
+
+/**
+ * Class đại diện cho một người dùng trong hệ thống, bao gồm thông tin cá nhân và vai trò. Dùng để hỗ trợ Discount Management (phân quyền cho Admin, Store Manager, Customer, Staff).
+ */
 public class User {
 
     private int userId;
     private String email;
-    private String password; // Thêm trường này
+    private String passwordHash; // Sử dụng password_hash thay vì password cho khớp với database
     private String role;
     private String firstName;
     private String lastName;
     private String phone;
     private String address;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    private String status;
 
-    // Getters and Setters
+    // Constructor mặc định
+    public User() {
+    }
+
+    public User(int userId, String email, String passwordHash, String role, String firstName, String lastName, String phone, String address, Timestamp createdAt, Timestamp updatedAt, String status) {
+        this.userId = userId;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -28,12 +53,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() { // Getter cho password
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) { // Setter cho password
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getRole() {
@@ -75,4 +100,29 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

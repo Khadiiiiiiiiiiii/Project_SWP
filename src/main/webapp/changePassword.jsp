@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>Change Password</title>
-        <link rel="stylesheet" href="CSS/changePassword.css">
+        <link rel="stylesheet" href="CSS/ChangePass.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     </head>
     <body>
 
-        <%@ include file="navbar.jsp" %>
+        <header><%@ include file="navbar.jsp" %></header>
 
         <div class="auth-container">
             <h2>Change Password</h2>
@@ -44,29 +44,13 @@
                     </div>
                 </div>
 
-                <button type="submit" class="auth-btn" style="margin-bottom: 20px;">Save Changes</button>
-                <a href="viewProfile.jsp" class="AccountInfor" 
-                   style="color: #33ccff; text-decoration: none; transition: color 0.3s ease;"
-                   onmouseover="this.style.color = '#ff6600'" 
-                   onmouseout="this.style.color = '#33ccff'">
-                    Click here to view Account Information!
-                </a>
+                <button type="submit" class="auth-btn">Save Changes</button>
+                <a href="viewProfile.jsp" class="account-info-link" style="text-decoration: none;">Click here to view Account Information!</a>
             </form>
             <% } %>
         </div>
 
         <script>
-            function validateForm() {
-                let newPassword = document.getElementById("newPassword").value;
-                let confirmNewPassword = document.getElementById("confirmNewPassword").value;
-
-                if (newPassword !== confirmNewPassword) {
-                    alert("New passwords do not match!");
-                    return false;
-                }
-                return true;
-            }
-
             function togglePassword(inputId, iconElement) {
                 let input = document.getElementById(inputId);
                 if (input.type === "password") {

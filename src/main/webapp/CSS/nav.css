@@ -1,0 +1,154 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar chỉnh đẹp hơn */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #E30019 !important; /* Màu đỏ ép buộc */
+    padding: 10px 30px;
+    color: white;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px; /* Chữ to hơn */
+    transition: 0.3s ease;
+    padding: 5px 15px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #ffcc00;
+}
+
+.nav-links a.active {
+    color: #ffcc00 !important;
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* Search Bar cải tiến */
+.search-bar {
+    display: flex;
+    align-items: center; /* Đảm bảo nằm cùng hàng */
+    background: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    position: relative;
+    height: 40px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #333;
+    padding: 5px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+}
+
+.search-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #d90000;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.search-btn:hover {
+    color: #ffcc00;
+}
+
+/* User & Cart Icons căn chỉnh đẹp */
+.user-cart {
+    display: flex;
+    gap: 15px;
+    font-size: 22px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user-cart a {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.user-cart a:hover {
+    color: #ffcc00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    .search-bar input {
+        width: 150px;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .user-cart {
+        justify-content: center;
+    }
+}

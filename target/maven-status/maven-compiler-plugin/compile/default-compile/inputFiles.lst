@@ -1,28 +1,74 @@
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ProductServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\DAO\CustomerDAO.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\model\User.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\addStaffController.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\updateStaffController.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\DeleteAccountServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\LogoutServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\DAO\StaffDAO.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\DAO\ProductDAO.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\model\Product.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\model\Staff.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\LoginServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ChangePasswordServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\deleteStaffController.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ForgotPasswordServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\UpdateProfileServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ProductDetailServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\dal\DBContext.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\model\CartItem.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ListStaffController.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\RegisterServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\DAO\UserDAO.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\CategoryServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\model\Cart.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\ProductSearchServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\DAO\CartItemDAO.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\StaffServlet.java
-D:\Documents\Professional document V\SWP391 (Software development project)\TechStore\TechStore\TechStore\src\main\java\com\mvc\controller\CartServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\StaffServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\CartServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\UserDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Cart.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\deleteStaffController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\ReviewDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\PromotionDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\LockCustomerServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\addProductManagement.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\RevenueReportController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Order.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\VnpayController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\ProductDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\updateStaffController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\DisableAccountServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\addStaffController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ChangePasswordServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Promotion.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\DiscountProductServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Orderr.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\dal\DBContext.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\StoreDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\OrderDetail.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\CartDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\RecomendDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ReviewsManagementServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\ReviewsManagementDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Payment.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\RegisterServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\HistoryOrder.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\OrderManagementDetailController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\PaymentCodServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\HistoryOrderServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ListStaffController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\PaymentDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\Config.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\VNPResponeController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\RevenueReportDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\CartItem.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ReviewServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\QRCodeServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Staff.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\CustomerDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\UpdateCustomerServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ProductController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\UpdateProfileServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ProductDetailServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ListProductManagement.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\AddCustomerServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Product.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\viewProductDetailManagement.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\ViewProductInOrder.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Customer.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\CheckoutServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\LoginServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ProductSearchServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ProductServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\LogoutServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\RecomendServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\CancelOrderServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Review.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ForgotPasswordServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ProductDiscountServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\User.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ViewProductInOrderController.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\CategoryServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\OrderDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\Store.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\DAO\StaffDAO.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\ListOrderManagement.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\DiscountServlet.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\vnpayQuery.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\controller\updateProductManagement.java
+D:\testcode\swp_new_VER2\swp_new_VER2\TechStore\src\main\java\com\mvc\model\RevenueReport.java

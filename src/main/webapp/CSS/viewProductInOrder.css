@@ -1,0 +1,25 @@
+
+body {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+.table-container {
+    max-width: 80%;
+    margin: auto;
+}
+.table {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+th {
+    background-color: #007bff !important;
+    color: white !important;
+    text-align: center;
+}
+td {
+    vertical-align: middle;
+}
+td:nth-child(3), td:nth-child(4) {
+    text-align: right;
+}

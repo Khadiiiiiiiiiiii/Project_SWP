@@ -1,8 +1,9 @@
 package com.mvc.controller;
 
-import com.mvc.DAO.StaffDAO;
+import com.mvc.DAO.CustomerDAO;
 import com.mvc.dal.DBContext;
-import com.mvc.model.User;
+import com.mvc.model.Customer;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,10 +11,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/StaffServlet")
 public class StaffServlet extends HttpServlet {
+
     private Connection connection;
 
     @Override
@@ -27,10 +32,19 @@ public class StaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StaffDAO staffDAO = new StaffDAO(connection);
-        List<User> customers = staffDAO.getAllCustomers();
-        
-        request.setAttribute("customers", customers);
-        request.getRequestDispatcher("staffDashboard.jsp").forward(request, response);
+        try {
+            if (connection == null || connection.isClosed()) {
+                throw new SQLException("Database connection is not available.");
+            }
+
+            CustomerDAO customerDAO = new CustomerDAO(connection);
+            List<Customer> customers = customerDAO.getAllCustomers();
+            request.setAttribute("customers", customers);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("staffDashboard.jsp");
+            dispatcher.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffServlet.class.getName()).log(Level.SEVERE, "Error fetching customers", ex);
+            response.sendRedirect("staffDashboard.jsp?error=exception");
+        }
     }
 }

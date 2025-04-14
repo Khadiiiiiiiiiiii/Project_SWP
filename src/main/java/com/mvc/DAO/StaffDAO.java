@@ -2,39 +2,16 @@ package com.mvc.DAO;
 
 import com.mvc.dal.DBContext;
 import com.mvc.model.Staff;
-import com.mvc.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StaffDAO {
+
     private Connection connection;
 
     public StaffDAO(Connection connection) {
         this.connection = connection;
-    }
-
-    public List<User> getAllCustomers() {
-        List<User> customers = new ArrayList<>();
-        String query = "SELECT user_id, email, first_name, last_name, phone, address FROM Users WHERE role = 'customer'";
-
-        try (PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                User user = new User();
-                user.setUserId(resultSet.getInt("user_id"));
-                user.setEmail(resultSet.getString("email"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setPhone(resultSet.getString("phone"));
-                user.setAddress(resultSet.getString("address"));
-                customers.add(user);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return customers;
     }
 
     public boolean addStaff(String email, String password, String firstName, String lastName, String phone, String address) throws SQLException {
@@ -128,9 +105,15 @@ public class StaffDAO {
             }
             throw e;
         } finally {
-            if (rs != null) rs.close();
-            if (stmtUser != null) stmtUser.close();
-            if (stmtStaff != null) stmtStaff.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmtUser != null) {
+                stmtUser.close();
+            }
+            if (stmtStaff != null) {
+                stmtStaff.close();
+            }
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
@@ -146,12 +129,11 @@ public class StaffDAO {
         System.out.println("StaffDAO: Checking if email exists - " + email);
         String sql = "SELECT email FROM Users WHERE email = ?";
 
-        try (Connection conn = DBContext.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email.trim());
 
-            try (ResultSet rs = stmt.executeQuery()) {
+            try ( ResultSet rs = stmt.executeQuery()) {
                 boolean exists = rs.next();
                 System.out.println("StaffDAO: Email exists=" + exists);
                 return exists;
@@ -161,13 +143,12 @@ public class StaffDAO {
 
     public Staff getStaffById(int staffId) throws SQLException {
         Staff staff = null;
-        String sql = "SELECT s.staff_id, u.user_id, u.email, u.first_name, u.last_name, u.phone, u.address, s.role, s.hired_date " +
-                     "FROM Staff s JOIN Users u ON s.user_id = u.user_id WHERE s.staff_id = ?";
+        String sql = "SELECT s.staff_id, u.user_id, u.email, u.first_name, u.last_name, u.phone, u.address, s.role, s.hired_date "
+                + "FROM Staff s JOIN Users u ON s.user_id = u.user_id WHERE s.staff_id = ?";
 
-        try (Connection conn = DBContext.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, staffId);
-            try (ResultSet rs = stmt.executeQuery()) {
+            try ( ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     staff = new Staff();
                     staff.setStaff_id(String.valueOf(rs.getInt("staff_id"))); // Chuyển sang String để tránh lỗi parse
@@ -190,12 +171,11 @@ public class StaffDAO {
 
     public void updateStaff(Staff staff, boolean updatePassword) throws SQLException {
         // Câu lệnh SQL cơ bản (không bao gồm password_hash nếu không cập nhật mật khẩu)
-        String sql = "UPDATE Users SET email = ?, first_name = ?, last_name = ?, phone = ?, address = ?, updated_at = CURRENT_TIMESTAMP " +
-                     (updatePassword ? ", password_hash = ?" : "") +
-                     " WHERE user_id = (SELECT user_id FROM Staff WHERE staff_id = ?)";
+        String sql = "UPDATE Users SET email = ?, first_name = ?, last_name = ?, phone = ?, address = ?, updated_at = CURRENT_TIMESTAMP "
+                + (updatePassword ? ", password_hash = ?" : "")
+                + " WHERE user_id = (SELECT user_id FROM Staff WHERE staff_id = ?)";
 
-        try (Connection conn = DBContext.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
             int paramIndex = 1;
             stmt.setString(paramIndex++, staff.getEmail().trim());
             stmt.setString(paramIndex++, staff.getFirst_name().trim());
@@ -234,9 +214,9 @@ public class StaffDAO {
             // Lấy user_id từ bảng Staff
             String getUserIdSql = "SELECT user_id FROM Staff WHERE staff_id = ?";
             int userId = -1;
-            try (PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdSql)) {
+            try ( PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdSql)) {
                 getUserIdStmt.setInt(1, staffId);
-                try (ResultSet rs = getUserIdStmt.executeQuery()) {
+                try ( ResultSet rs = getUserIdStmt.executeQuery()) {
                     if (rs.next()) {
                         userId = rs.getInt("user_id");
                     } else {
@@ -286,8 +266,12 @@ public class StaffDAO {
             }
             throw e;
         } finally {
-            if (stmtStaff != null) stmtStaff.close();
-            if (stmtUser != null) stmtUser.close();
+            if (stmtStaff != null) {
+                stmtStaff.close();
+            }
+            if (stmtUser != null) {
+                stmtUser.close();
+            }
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
@@ -301,12 +285,10 @@ public class StaffDAO {
 
     public List<Staff> getAllStaff() throws SQLException {
         List<Staff> staffList = new ArrayList<>();
-        String sql = "SELECT s.staff_id, u.user_id, u.email, u.first_name, u.last_name, u.phone, u.address, s.role, s.hired_date " +
-                     "FROM Staff s JOIN Users u ON s.user_id = u.user_id WHERE s.role = 'STAFF'";
+        String sql = "SELECT s.staff_id, u.user_id, u.email, u.first_name, u.last_name, u.phone, u.address, s.role, s.hired_date "
+                + "FROM Staff s JOIN Users u ON s.user_id = u.user_id WHERE s.role = 'STAFF'";
 
-        try (Connection conn = DBContext.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql);  ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Staff staff = new Staff();
                 staff.setStaff_id(String.valueOf(rs.getInt("staff_id")));
@@ -322,5 +304,38 @@ public class StaffDAO {
             }
         }
         return staffList;
+    }
+
+    public boolean isEmailExists(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Users WHERE LOWER(email) = LOWER(?)";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    System.out.println("StaffDAO: isEmailExists - Email=" + email + ", Count=" + count);
+                    return count > 0;
+                }
+            }
+        }
+        System.out.println("StaffDAO: isEmailExists - Email=" + email + ", No result found.");
+        return false;
+    }
+
+
+    public boolean isPhoneExists(String phone) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Users WHERE phone = ?";
+        try ( Connection conn = DBContext.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, phone);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    System.out.println("StaffDAO: isPhoneExists - Phone=" + phone + ", Count=" + count);
+                    return count > 0;
+                }
+            }
+        }
+        System.out.println("StaffDAO: isPhoneExists - Phone=" + phone + ", No result found.");
+        return false;
     }
 }

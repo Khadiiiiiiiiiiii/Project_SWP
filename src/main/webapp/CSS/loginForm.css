@@ -1,0 +1,205 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-section {
+    width: 50%; /* Giảm tỷ lệ để cân đối với form */
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.left-section video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.left-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+    z-index: 2;
+}
+
+.right-section {
+    width: 50%; /* Tăng tỷ lệ để form chiếm nhiều không gian hơn */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0 20px; /* Thêm padding để không sát cạnh */
+}
+
+.login-container {
+    width: 100%;
+    max-width: 600px; /* Tăng kích thước form để tràn rộng hơn */
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+h2 {
+    color: #e60000;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.subtext {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: #333;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #e60000;
+    box-shadow: 0 0 10px rgba(230, 0, 0, 0.2);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+    font-size: 1.2em;
+}
+
+.toggle-password:hover {
+    color: #e60000;
+}
+
+.extra-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    color: #555;
+    margin: 15px 0;
+}
+
+.login-btn {
+    background: linear-gradient(45deg, #e60000, #ff3333);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-text {
+    margin-top: 20px;
+    font-size: 0.95em;
+}
+
+.signup-text a {
+    color: #e60000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-text a:hover {
+    color: #cc0000;
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #e60000;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
+    .left-section, .right-section {
+        width: 100%;
+        height: 50vh;
+    }
+    .login-container {
+        max-width: 90%;
+        margin: 20px;
+    }
+    header .search-bar input {
+        width: 200px;
+    }
+    header .search-bar input:focus {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-top: 60px;
+    }
+    header .search-bar input {
+        width: 150px;
+    }
+    header .search-bar input:focus {
+        width: 200px;
+    }
+}

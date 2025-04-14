@@ -1,26 +1,23 @@
 package com.mvc.model;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class đại diện cho giỏ hàng của khách hàng, chứa danh sách sản phẩm và số lượng.
+ * Hỗ trợ Discount Management với giảm giá trực tiếp và mã giảm giá.
+ */
 public class Cart {
-    private Map<Integer, Integer> items; // Key: product_id, Value: quantity
+    private Map<Integer, CartItem> items = new HashMap<>();
 
-    public Cart() {
-        items = new HashMap<>();
-    }
-
-    public void addItem(int productId, int quantity) {
-        items.put(productId, items.getOrDefault(productId, 0) + quantity);
+    public void addItem(CartItem item) {
+        items.put(item.getProductId(), item);
     }
 
     public void updateItem(int productId, int quantity) {
         if (items.containsKey(productId)) {
-            if (quantity > 0) {
-                items.put(productId, quantity);
-            } else {
-                items.remove(productId);
-            }
+            items.get(productId).setQuantity(quantity);
         }
     }
 
@@ -28,11 +25,13 @@ public class Cart {
         items.remove(productId);
     }
 
-    public Map<Integer, Integer> getItems() {
-        return items;
+    public BigDecimal getTotalPrice() {
+        return items.values().stream()
+                .map(CartItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public void clearCart() {
-        items.clear();
+    public Map<Integer, CartItem> getItems() {
+        return items;
     }
 }
